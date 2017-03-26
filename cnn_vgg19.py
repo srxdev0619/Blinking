@@ -69,10 +69,7 @@ def new_cnn(net_input):
     net['conv2_1'] = Conv2DLayer(net['pool1'], 32, 3, pad=1, flip_filters=False)
     net['conv2_2'] = Conv2DLayer(net['conv2_1'], 32, 3, pad=1, flip_filters=False)
     net['pool2'] = MaxPool2DLayer(net['conv2_2'], 2)
-    net['conv3_1'] = Conv2DLayer(net['pool2'], 64, 3, pad=1, flip_filters=False)
-    net['conv3_2'] = Conv2DLayer(net['conv3_1'], 64, 3, pad=1, flip_filters=False)
-    net['pool3'] = MaxPool2DLayer(net['conv3_2'], 2)
-    net['fc1'] = DropoutLayer(DenseLayer(net['pool3'],
+    net['fc1'] = DropoutLayer(DenseLayer(net['pool2'],
                                          num_units=10,
                                          nonlinearity=lasagne.nonlinearities.leaky_rectify))
     net['output'] = DenseLayer(net['fc1'],
